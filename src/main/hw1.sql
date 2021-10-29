@@ -168,17 +168,6 @@ where e2.id is null limit 10;
 --Найти список ID отделов с максимальной суммарной зарплатой сотрудников--
 create
 or replace view dep_max_salary as
-with sum_salary as
-         (select department_id, sum(salary) as salary
-          from employee
-          group by department_id)
-select department_id
-from sum_salary a
-where a.salary = (select max(salary) from sum_salary);
-
-
-create
-or replace view dep_max_salary as
 with sum_salary as (select e.department_id, sum(salary) as salary
                     from employee e
                     group by department_id)
